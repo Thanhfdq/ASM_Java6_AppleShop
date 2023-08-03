@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 	
-	//test commit
+	//test commit >Z?????????
     @RequestMapping("/index")
     public String test(){
         return "user/index";
