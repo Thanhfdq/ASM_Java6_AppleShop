@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class TestController {
 	
 	//test commit >Z?????????
     @RequestMapping("/index")
-    public String test(){
+    public String testv23(){
         return "user/index";
     }
 
