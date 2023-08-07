@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class TestController {
 	
 	//test commit >Z?????????
@@ -17,6 +17,7 @@ public class TestController {
     public String testv2(){
         return "user/product";
     }
+    
     @RequestMapping("/productv2")
     public String testv3(){
         return "user/about";
