@@ -33,10 +33,11 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.requestMatchers("/**").permitAll()
-				.requestMatchers("/admin/**").hasRole("ADMIN")
-				.anyRequest().authenticated())
-				.formLogin((form) -> form.loginPage("/auth/login")
+				.requestMatchers("/order/**").authenticated()
+				.requestMatchers("/admin/**").hasAnyRole("ADMIN","DIREC")
+				.requestMatchers("/rest/authorities").hasRole("DIREC")
+				.anyRequest().permitAll())
+				.formLogin((form) -> form.loginPage("/auth/login/form")
 						.defaultSuccessUrl("/auth/login/success",false)
 						.failureUrl("/auth/login/error").permitAll())
 				.logout((logout) -> logout.permitAll())

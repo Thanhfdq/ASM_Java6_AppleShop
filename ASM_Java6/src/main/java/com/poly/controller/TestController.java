@@ -28,5 +28,9 @@ public class TestController {
         return "/admin/login.html";
     }
     
-    
+    @RequestMapping("/payment")
+    public String testv2(Model model){
+        model.addAttribute("message", "payment");
+    	return "/user/index.html";
+    }
 }
