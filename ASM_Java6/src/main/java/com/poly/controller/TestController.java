@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.poly.service.UserService;
+
 
 
 
@@ -32,5 +34,10 @@ public class TestController {
     public String testv2(Model model){
         model.addAttribute("message", "payment");
     	return "/user/index.html";
+    }
+    
+    @RequestMapping("/productv2")
+    public String testv3(){
+        return "user/about";
     }
 }
