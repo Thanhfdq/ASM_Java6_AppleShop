@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
 
@@ -39,9 +39,9 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4" th:text="${message}"></h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="/auth/login/success" method="post">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
@@ -58,14 +58,14 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="products.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="/auth/login/success" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="products.html" class="btn btn-google btn-user btn-block">
+                                        <a href="/oauth2/authorization/google" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-                                        <a href="products.html" class="btn btn-facebook btn-user btn-block">
+                                        <a href="/oauth2/authorization/facebook" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                     </form>
