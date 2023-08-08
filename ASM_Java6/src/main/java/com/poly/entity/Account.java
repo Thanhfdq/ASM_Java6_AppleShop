@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "Account")
+@Table(name = "Accounts")
 @SuppressWarnings("serial")
 @NoArgsConstructor
 @AllArgsConstructor

@@ -18,4 +18,5 @@ public interface ProductService {
     List<Product> findbyCategoryId(String cid);
     List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice);
 
+
 }
