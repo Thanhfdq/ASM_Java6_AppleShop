@@ -57,5 +57,7 @@ public class UserService implements UserDetailsService{
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 	
-
+	public Account getOneByUsername(String username) {
+		return accountDAO.findById(username).get();
+	}
 }
