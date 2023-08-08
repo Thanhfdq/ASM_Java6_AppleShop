@@ -21,19 +21,19 @@ public class OrderController {
 	
 	@RequestMapping("/order/checkout")
 	public String checkout() {
-		return "order/checkout";
+		return "user/order-checkout";
 	}
 
 	@RequestMapping("/order/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Long id) {
 		model.addAttribute("order", orderService.findById(id));
-		return "order/detail";
+		return "user/order-detail";
 	}
 	
 	@RequestMapping("/order/list")
 	public String detail(Model model, HttpServletRequest request) {
 		String username = request.getRemoteUser();
 		model.addAttribute("orders", orderService.findByUsername(username));
-		return "order/list";
+		return "user/order-list";
 	}
 }
