@@ -17,11 +17,11 @@ import com.poly.service.CategoryService;
 @RestController
 @RequestMapping("/rest/categories")
 public class CategoryRestController {
-	@Autowired
-	CategoryService categoryService;
-	
-	@GetMapping
-	public List<Category> findAll() {
-		return categoryService.findAll();
-	}
+//	@Autowired
+//	CategoryService categoryService;
+//	
+//	@GetMapping
+//	public List<Category> findAll() {
+//		return categoryService.findAll();
+//	}
 }

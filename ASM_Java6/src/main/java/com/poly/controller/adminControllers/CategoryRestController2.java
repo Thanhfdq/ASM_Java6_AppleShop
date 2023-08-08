@@ -18,7 +18,7 @@ import com.poly.entity.Category;
 
 @CrossOrigin("*")
 @RestController
-public class CategoryRestController {
+public class CategoryRestController2 {
 	@Autowired
 	CategoryDAO dao;
 

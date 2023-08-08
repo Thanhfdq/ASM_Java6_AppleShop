@@ -24,14 +24,14 @@ public class AuthController {
 	@RequestMapping("/auth/login/success")
     public String AuthLogin(Model model) {
     	model.addAttribute("message","Success");
-    	return "forward:/auth/login/form";
+    	return "redirect:/product/list";
     }
     
     @RequestMapping("/oauth2/login/success")
     public String OAuthLogin(OAuth2AuthenticationToken oauth2,Model model) {
     	userService.loginFormOAuth2(oauth2);
     	model.addAttribute("message","Success");
-    	return "forward:/auth/login/form";
+    	return "redirect:/product/list";
     }
     
     @RequestMapping("/auth/login/error")
