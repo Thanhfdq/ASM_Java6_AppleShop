@@ -1,19 +1,22 @@
 package com.poly.service;
 
-import java.util.List;
-
 import com.poly.entity.Product;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
-	public List<Product> findAll() ;
-	
-	public Product findById(Integer id) ;
 
-	public List<Product> findByCategoryId(String cid) ;
+    List<Product> findAll();
+    List<Product> findPaginated(Pageable pageable);
 
-	public Product create(Product product) ;
+    long getTotalProducts();
 
-	public Product update(Product product) ;
+    Product findByID(Integer id);
 
-	public void delete(Integer id) ;
+    List<Product> findbyCategoryId(String cid);
+    List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice);
+
+
 }
