@@ -39,6 +39,7 @@ public class Product implements Serializable{
 	Boolean available;
 	@Column(columnDefinition = "varchar(225)")
 	private String photo;
+	Integer quantity;
 	@ManyToOne
 	@JoinColumn(name ="Categoryid")
 	Category category;
