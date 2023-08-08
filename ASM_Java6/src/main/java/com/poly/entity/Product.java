@@ -37,8 +37,6 @@ public class Product implements Serializable{
 	@Column(name ="Createdate")
 	Date createDate = new Date();
 	Boolean available;
-	@Column(columnDefinition = "varchar(225)")
-	private String photo;
 	Integer quantity;
 	@ManyToOne
 	@JoinColumn(name ="Categoryid")

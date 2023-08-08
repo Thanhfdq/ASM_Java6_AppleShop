@@ -87,15 +87,14 @@
 								</tr>
 								<tr class="table_row" ng-repeat="item in cart.items">
 									<td>{{item.name}}</td>
-									<td><img th:src="@{|/assets/images/{{item.photo}}|}"
-										th:alt="@{|/assets/images/{{item.photo}}|}" width="100px">
-									</td>
+									 <td><img ng-src="{{item.image}}" width="100px">
+									</td> 
 
 									<td><input ng-change="cart.saveToLocalStorage()"
 										ng-model="item.qty" type="number" min="1"
 										style="width: 60px; text-align: center;" /></td>
-									<td>${{item.price | number : 2}}</td>
-									<td>${{item.qty*item.price | number : 2}}</td>
+									 <td>{{ item.price | currency : '$' }}</td>
+									<td>{{ (item.qty * item.price) | currency : '$' }}</td>
 									<td>
 										<button type="submit" ng-click="cart.remove(item.id)"
 											class="btn btn-sm btn-danger">
@@ -139,7 +138,7 @@
 							</div>
 
 							<div class="size-209">
-								<span class="mtext-110 cl2"> ${{cart.amount}} </span>
+								<span class="mtext-110 cl2">Đang tính </span>
 							</div>
 						</div>
 
@@ -201,7 +200,7 @@
 							</div>
 
 							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2"> ${{cart.amount}} </span>
+								<span class="mtext-110 cl2"> {{cart.amount | currency : '$'}} </span>
 							</div>
 						</div>
 
