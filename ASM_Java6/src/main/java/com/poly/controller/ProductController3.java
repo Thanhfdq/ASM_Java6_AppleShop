@@ -35,7 +35,7 @@ public class ProductController3 {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("items", list);
-            return "/user/index";
+            return "/user/product";
         }
 
 

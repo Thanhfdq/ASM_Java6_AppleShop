@@ -21,23 +21,23 @@ public class ProductController2 {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping("/product/list")
-	public String list(Model model, @RequestParam("cid") Optional<String> cid) {
-		if(cid.orElse("").isEmpty()) {
-			List<Product> list = productService.findAll();
-			model.addAttribute("items", list);
-		}
-		else {
-			List<Product> list = productService.findByCategoryId(cid.get());
-			model.addAttribute("items", list);
-		}
-		return "user/product";
-	}
-		
-	@RequestMapping("/product/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
-		Product item = productService.findById(id);
-		model.addAttribute("item", item);
-		return "user/product-detail";
-	}
+//	@RequestMapping("/product/list")
+//	public String list(Model model, @RequestParam("cid") Optional<String> cid) {
+//		if(cid.orElse("").isEmpty()) {
+//			List<Product> list = productService.findAll();
+//			model.addAttribute("items", list);
+//		}
+//		else {
+//			List<Product> list = productService.findByCategoryId(cid.get());
+//			model.addAttribute("items", list);
+//		}
+//		return "user/product";
+//	}
+//		
+//	@RequestMapping("/product/detail/{id}")
+//	public String detail(Model model, @PathVariable("id") Integer id) {
+//		Product item = productService.findById(id);
+//		model.addAttribute("item", item);
+//		return "user/product-detail";
+//	}
 }

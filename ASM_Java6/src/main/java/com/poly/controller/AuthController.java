@@ -48,7 +48,7 @@ public class AuthController {
     public String OAuthLogin(OAuth2AuthenticationToken oauth2,Model model) {
     	userService.loginFormOAuth2(oauth2);
     	model.addAttribute("message","Success");
-    	return "redirect:/product/list";
+    	return "redirect:/user/home";
     }
     
     @RequestMapping("/auth/login/error")
