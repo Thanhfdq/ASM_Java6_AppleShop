@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.entity.Product;
 import com.poly.service.ProductService;
+import com.poly.service.impl.ProductServiceImpl;
 
 @CrossOrigin("*")
 @RestController
@@ -22,6 +23,7 @@ import com.poly.service.ProductService;
 public class ProductRestController {
 	@Autowired
 	ProductService productService;
+	
 	
 	@GetMapping
 	public List<Product> getAll() {

@@ -13,10 +13,14 @@ public interface ProductService {
 
     long getTotalProducts();
 
-    Product findByID(Integer id);
+    Product findById(Integer id);
 
-    List<Product> findbyCategoryId(String cid);
+    List<Product> findByCategoryId(String cid);
     List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice);
+    
+    public Product create(Product product) ;
 
+	public Product update(Product product) ;
 
+	public void delete(Integer id) ;
 }

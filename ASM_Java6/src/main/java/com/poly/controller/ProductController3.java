@@ -17,16 +17,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class ProductController {
+public class ProductController3 {
 @Autowired
     ProductService productService;
     private final int pageSize = 8;
     @GetMapping("/user/home")
     public String list(@RequestParam(defaultValue = "0") int page,Model model, @RequestParam("cid") Optional<String> cid){
         if (cid.isPresent()){
-            List<Product> list = productService.findbyCategoryId(cid.get());
+            List<Product> list = productService.findByCategoryId(cid.get());
 
-            return "user/product";
+            return "/user/product";
         }else {
             Pageable pageable = PageRequest.of(page, pageSize, Sort.by("id").ascending());
             List<Product> list = productService.findPaginated(pageable);
@@ -35,7 +35,7 @@ public class ProductController {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("items", list);
-            return "user/index";
+            return "/user/index";
         }
 
 
@@ -43,7 +43,7 @@ public class ProductController {
 
     @RequestMapping("user/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id){
-        Product item = productService.findByID(id);
+        Product item = productService.findById(id);
         model.addAttribute("item", item);
         List<Product> list = productService.findAll();
         model.addAttribute("items", list);
@@ -55,7 +55,7 @@ public class ProductController {
     @RequestMapping("/user/shop")
     public String listShop(Model model, @RequestParam("cid") Optional<String> cid){
         if (cid.isPresent()){
-            List<Product> list = productService.findbyCategoryId(cid.get());
+            List<Product> list = productService.findByCategoryId(cid.get());
             model.addAttribute("items", list);
         }else {
             List<Product> list = productService.findAll();

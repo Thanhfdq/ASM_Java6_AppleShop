@@ -3,6 +3,8 @@ package com.poly.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.poly.dao.ProductDAO;
@@ -38,4 +40,19 @@ public class ProductServiceImpl implements ProductService{
 	public void delete(Integer id) {
 		dao.deleteById(id);
 	}
+
+	@Override
+    public List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice) {
+        return dao.findByPriceAndCategoryId(categoryId, minPrice, maxPrice);
+    }
+    @Override
+    public List<Product> findPaginated(Pageable pageable) {
+        Page<Product> productPage = dao.findAll(pageable);
+        return productPage.getContent();
+    }
+
+    @Override
+    public long getTotalProducts() {
+        return dao.count();
+    }
 }
