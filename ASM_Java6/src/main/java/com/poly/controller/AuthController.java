@@ -2,18 +2,24 @@ package com.poly.controller;
 
 import java.util.stream.Collectors;
 
+
+
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.poly.entity.Account;
 import com.poly.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AuthController {
@@ -48,7 +54,7 @@ public class AuthController {
     public String OAuthLogin(OAuth2AuthenticationToken oauth2,Model model) {
     	userService.loginFormOAuth2(oauth2);
     	model.addAttribute("message","Success");
-    	return "redirect:/user/home";
+    	return "redirect:/order/checkout";
     }
     
     @RequestMapping("/auth/login/error")
@@ -68,6 +74,13 @@ public class AuthController {
 	public String denied(Model model) {
 		model.addAttribute("message", "Bạn không có quyền truy xuất!");
 		return "forward:/auth/login/form";
+	}
+	
+	@CrossOrigin("*")
+	@ResponseBody
+	@RequestMapping("/rest/security/authentication")
+	public Object getAuthentication(HttpSession session) {
+		return session.getAttribute("authentication");
 	}
 
 }

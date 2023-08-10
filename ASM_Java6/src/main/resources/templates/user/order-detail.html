@@ -1,5 +1,5 @@
-<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/index :: dynamic (~{::main})}">
-    <main th:object="${order}">
+<div xmlns:th="http://www.thymeleaf.org">
+    <main th:object="${order}"  ng-app="app" ng-controller="cart-ctrl">
         <div class="panel panel-primary">
             <div class="panel-heading">ORDER INFORMATION</div>
             <div class="panel-body">
