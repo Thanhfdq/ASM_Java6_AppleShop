@@ -31,6 +31,7 @@ public class AuthController {
 		return "/admin/login.html";
 	}
 
+
 	@GetMapping("/auth/login/success")
 	public String x(@RequestParam("username") String username) {
 		UserDetails userDetails = userService.loadUserByUsername(username);
@@ -68,6 +69,7 @@ public class AuthController {
 	}
 
 	@RequestMapping("/auth/login/error")
+
 	public String error(Model model) {
 		model.addAttribute("message", "Sai thông tin đăng nhập!");
 		return "forward:/auth/login/form";
