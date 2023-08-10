@@ -1,5 +1,8 @@
 package com.poly.service;
 
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 import com.poly.dao.AccountDAO;
 import com.poly.entity.Account;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UserService implements UserDetailsService{
 
@@ -28,6 +33,8 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	BCryptPasswordEncoder pe;
 	
+	@Autowired
+	HttpSession session;
 	/*--Ma hoa mat khau--*/
 	
 	
@@ -39,6 +46,11 @@ public class UserService implements UserDetailsService{
 			String[] roles = account.getAuthorities().stream()
 					.map(authority -> authority.getRole().getId())
 					.collect(Collectors.toList()).toArray(new String[0]);
+			Map<String, Object> authentication = new HashMap<>();
+			authentication.put("user", account);
+			byte[] token = (username + ":" + account.getPassword()).getBytes();
+			authentication.put("token", "Basic " + Base64.getEncoder().encodeToString(token));
+			session.setAttribute("authentication", authentication);
 			return User.withUsername(username)
 					.password(pe.encode(password)).roles(roles).build();
 		} catch (Exception e) {
