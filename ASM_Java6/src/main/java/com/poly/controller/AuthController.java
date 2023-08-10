@@ -43,7 +43,7 @@ public class AuthController {
 			if ("ROLE_ADMIN".equalsIgnoreCase(role)) {
 				return "redirect:/admin/index"; // Redirect to admin page
 			} else if ("ROLE_USER".equalsIgnoreCase(role)) {
-				return "redirect:/product/list"; // Redirect to user's product list page
+				return "redirect:/user/home"; // Redirect to user's product list page
 			}
 			System.out.println(role);
 			System.out.println(roles.toString());
@@ -82,10 +82,10 @@ public class AuthController {
 		return "forward:/auth/login/form";
 	}
 
-	@RequestMapping("/auth/access/denied")
-	public String denied(Model model) {
-		model.addAttribute("message", "Bạn không có quyền truy xuất!");
-		return "forward:/auth/login/form";
-	}
+//	@RequestMapping("/auth/access/denied")
+//	public String denied(Model model) {
+//		model.addAttribute("message", "Bạn không có quyền truy xuất!");
+//		return "forward:/auth/login/form";
+//	}
 
 }
