@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:fragment="dynamic(main)">
 <head>
 	<title>Product</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<link th:href="@{/assets/css/shopping-cart-app.css}" rel="stylesheet" />
+	<script th:src="@{/assets/js/shopping-cart-app.js}"></script>
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.png}"/>
 	<!--===============================================================================================-->
@@ -36,7 +40,7 @@
 	<!--===============================================================================================-->
 </head>
 
-<body class="animsition">
+<body class="animsition" ng-app="app" ng-controller="cart-ctrl">
 	
 	<!-- Header -->
 	<header th:replace="user/index :: header"></header>
@@ -50,7 +54,7 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<a th:each="c:${cates}"><a th:href="@{|/user/home?cid=${c.id}|}">
+					<a th:each="c:${cates}"><a th:href="@{|/user/shop?cid=${c.id}|}">
 						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
 							[[${c.name}]]
 						</button>
@@ -62,7 +66,7 @@
 					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
 						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						 Filter
+						Filter
 					</div>
 
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
@@ -93,181 +97,70 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a  th:href="@{/user/shop}" class="filter-link stext-106 trans-04">
 										Default
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Popularity
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Average rating
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Newness
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a th:href="@{/products/sort(order='asc')}" class="filter-link stext-106 trans-04">
 										Price: Low to High
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a th:href="@{/products/sort(order='desc')}" class="filter-link stext-106 trans-04">
 										Price: High to Low
 									</a>
 								</li>
 							</ul>
 						</div>
 
+
 						<div class="filter-col2 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Price
-							</div>
+							<form th:action="@{/price}" method="get">
+								<div class="mtext-102 cl2 p-b-15">
+									Price
+								</div>
 
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										All
-									</a>
-								</li>
+								<ul>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=null,maxPrice=null)}" class="filter-link stext-106 trans-04 filter-link-active">
+											All
+										</a>
+									</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$0.00 - $50.00
-									</a>
-								</li>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=0,maxPrice=5000000)}" class="filter-link stext-106 trans-04">
+											Less than 5 million VND
+										</a>
+									</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$50.00 - $100.00
-									</a>
-								</li>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=5000000,maxPrice=10000000)}" class="filter-link stext-106 trans-04">
+											From 5 million to 10 million VND
+										</a>
+									</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$100.00 - $150.00
-									</a>
-								</li>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=10000000,maxPrice=15000000)}" class="filter-link stext-106 trans-04">
+											From 10 million to 15 million VND
+										</a>
+									</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$150.00 - $200.00
-									</a>
-								</li>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=15000000,maxPrice=20000000)}" class="filter-link stext-106 trans-04">
+											From 15 million to 20 million VND
+										</a>
+									</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$200.00+
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col3 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Color
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Black
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Blue
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Grey
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Green
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Red
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-										<i class="zmdi zmdi-circle-o"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										White
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col4 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Tags
-							</div>
-
-							<div class="flex-w p-t-4 m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
+									<li class="p-b-6">
+										<a th:href="@{/price(minPrice=20000000,maxPrice=2000000000)}" class="filter-link stext-106 trans-04">
+											More than 20 million VND
+										</a>
+									</li>
+								</ul>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -280,7 +173,7 @@
 						<div class="block2-pic hov-img0">
 							<img th:src="${p.image}" alt="IMG-PRODUCT">
 
-							<a th:href="@{'detailmini/' + ${p.id}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+							<a th:href="@{'detail/' + ${p.id}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</a>
 						</div>
@@ -291,7 +184,7 @@
 								</a>
 
 
-								<span th:text="${p.price}" class="stext-105 cl3"></span>
+								<span th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')} +'₫'" class="stext-105 cl3">₫</span>
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
@@ -307,9 +200,30 @@
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
+
+				<div class="pagination justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li th:if="${currentPage > 0}" class="page-item">
+								<a th:href="@{/user/shop(page=${currentPage - 1})}" class="page-link" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+
+							<li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:class="${i == currentPage ? 'active' : ''}">
+								<a th:href="@{/user/shop(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+							</li>
+
+							<li th:if="${currentPage < totalPages - 1}" class="page-item">
+								<a th:href="@{/user/shop(page=${currentPage + 1})}" class="page-link" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+
 			</div>
 		</div>
 	</div>
