@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,9 +24,8 @@ public class ProductServicelmpl implements ProductService {
         return pdao.findById(id).get();
     }
 
-    @Override
-    public List<Product> findbyCategoryId(String cid) {
-        return pdao.findByCategoryId(cid);
+    public List<Product> findbyCategoryId(String cid, Pageable pageable) {
+        return pdao.findByCategoryId(cid, pageable);
     }
 
     @Override
@@ -43,5 +41,13 @@ public class ProductServicelmpl implements ProductService {
     @Override
     public long getTotalProducts() {
         return pdao.count();
+    }
+    @Override
+    public List<Product> searchByKeyword(String keyword, Pageable pageable) {
+        return pdao.searchByKeyword(keyword, pageable);
+    }
+    @Override
+    public List<Product> getProductsByPriceRange(double minPrice, double maxPrice, Pageable pageable) {
+        return pdao.findByPriceBetween(minPrice, maxPrice, pageable);
     }
 }

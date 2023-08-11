@@ -1,6 +1,7 @@
 package com.poly.service;
 
 import com.poly.entity.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public interface ProductService {
 
     Product findByID(Integer id);
 
-    List<Product> findbyCategoryId(String cid);
+    List<Product> findbyCategoryId(String cid, Pageable pageable);
     List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice);
 
 
+    List<Product> searchByKeyword(String keyword, Pageable pageable);
+    List<Product> getProductsByPriceRange(double minPrice, double maxPrice, Pageable pageable);
 }
