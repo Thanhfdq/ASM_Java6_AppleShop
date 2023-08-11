@@ -53,6 +53,7 @@ public class WebSecurityConfig {
 		
 		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeHttpRequests((requests) -> requests
+//				.requestMatchers("/order/**").
 				.requestMatchers("/rest/**").permitAll()
 				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
@@ -64,7 +65,14 @@ public class WebSecurityConfig {
 			.failureUrl("/auth/login/error")
 			.permitAll()
 		)
-		.logout((logout) -> logout.permitAll());
+		.logout((logout) -> logout.permitAll())
+		.rememberMe(Customizer.withDefaults())
+		.exceptionHandling((handling) -> handling.accessDeniedPage("/auth/access/denied"))
+		.oauth2Login((oauth2) -> oauth2.loginPage("/auth/login/form")
+			.defaultSuccessUrl("/oauth2/login/success",true)
+			.failureUrl("/auth/login/error")
+			.authorizationEndpoint(authorization -> authorization
+					.baseUri("/oauth2/authorization")));
 	
 	return http.build();
 		
