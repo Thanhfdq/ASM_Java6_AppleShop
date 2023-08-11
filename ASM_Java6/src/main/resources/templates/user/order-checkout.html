@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -45,8 +45,8 @@
 <!--===============================================================================================-->
 
 </head>
-<body >
-    <main class="container mt-5" ng-app="app" ng-controller="cart-ctrl" th:fragment="dynamic(main)">
+ <div th:replace="~{/user/shoping-cart :: cart_frag}"></div>
+    <main class="container mt-5" ng-app="app" ng-controller="cart-ctrl">
         <div class="card">
             <div class="card-header bg-info text-white">
                 ORDER PURCHASING

@@ -68,6 +68,7 @@ app.controller("cart-ctrl", function($scope, $http){
 			},
 			purchase(){
 				var order = angular.copy(this);
+				console.log(order)
 				// Thực hiện đặt hàng
 				$http.post("/rest/orders", order).then(resp => {
 					alert("Đặt hàng thành công!");

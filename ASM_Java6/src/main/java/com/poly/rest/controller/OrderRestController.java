@@ -23,4 +23,5 @@ public class OrderRestController {
 	public Order purchase(@RequestBody JsonNode orderData) {
 		return orderService.create(orderData);
 	}
+
 }
