@@ -33,8 +33,13 @@ public class OrderController {
 	HttpSession session;
 	
 	@RequestMapping("/order/checkout")
-	public String checkout() {
-		return "user/order-checkout";
+	public String checkout(HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+		if(session.getAttribute("authentication") != null){
+			return "user/order-checkout";
+		}
+		return "redirect:/auth/login/form";
+		
 	}
 
 	@RequestMapping("/order/detail/{id}")

@@ -57,12 +57,14 @@ app.controller("cart-ctrl", function($scope, $http){
 			},
 			createDate: new Date(),
 			address: "",
+			status: 0,
 			get orderDetails(){
 				return $cart.items.map(item => {
 					return {
 						product:{id: item.id},
 						price: item.price,
 						quantity: item.qty
+						
 					}
 				});
 			},

@@ -37,7 +37,8 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name ="Username")
 	Account account;
-	
+	@Column(columnDefinition = "bit")
+	Boolean status;
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
