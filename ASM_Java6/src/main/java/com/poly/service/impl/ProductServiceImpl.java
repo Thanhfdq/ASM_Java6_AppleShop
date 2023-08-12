@@ -17,16 +17,40 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductDAO dao;
 
-	public List<Product> findAll() {
+	@Override
+	public List<Product> findAll(){
 		return dao.findAll();
 	}
-	
-	public Product findById(Integer id) {
+	@Override
+	public Product findByID(Integer id){
 		return dao.findById(id).get();
 	}
 
-	public List<Product> findByCategoryId(String cid) {
-		return dao.findByCategoryId(cid);
+	public List<Product> findbyCategoryId(String cid, Pageable pageable) {
+		return dao.findByCategoryId(cid, pageable);
+	}
+
+	@Override
+	public List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice) {
+		return dao.findByPriceAndCategoryId(categoryId, minPrice, maxPrice);
+	}
+	@Override
+	public List<Product> findPaginated(Pageable pageable) {
+		Page<Product> productPage = dao.findAll(pageable);
+		return productPage.getContent();
+	}
+
+	@Override
+	public long getTotalProducts() {
+		return dao.count();
+	}
+	@Override
+	public List<Product> searchByKeyword(String keyword, Pageable pageable) {
+		return dao.searchByKeyword(keyword, pageable);
+	}
+	@Override
+	public List<Product> getProductsByPriceRange(double minPrice, double maxPrice, Pageable pageable) {
+		return dao.findByPriceBetween(minPrice, maxPrice, pageable);
 	}
 
 	public Product create(Product product) {
@@ -41,18 +65,5 @@ public class ProductServiceImpl implements ProductService{
 		dao.deleteById(id);
 	}
 
-	@Override
-    public List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice) {
-        return dao.findByPriceAndCategoryId(categoryId, minPrice, maxPrice);
-    }
-    @Override
-    public List<Product> findPaginated(Pageable pageable) {
-        Page<Product> productPage = dao.findAll(pageable);
-        return productPage.getContent();
-    }
 
-    @Override
-    public long getTotalProducts() {
-        return dao.count();
-    }
 }

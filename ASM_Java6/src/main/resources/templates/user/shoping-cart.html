@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -46,7 +46,7 @@
 
 </head>
 
-<body class="animsition" ng-app="app" ng-controller="cart-ctrl">
+<body class="animsition" ng-app="app" ng-controller="cart-ctrl" th:fragment="cart_frag">
 
 	<!-- Header -->
 	<header th:replace="user/index :: header"></header>
@@ -221,11 +221,11 @@
 	</form>
   <!-- <main th:insert="${main}"></main> -->
 	<!-- Footer -->
-	<footer th:replace="user/index :: footer"></footer>
+	<!-- <footer th:replace="user/index :: footer"></footer>
 
 
-	<!-- Back to top -->
-	<div th:replace="user/index :: backtop"></div>
+	Back to top
+	<div th:replace="user/index :: backtop"></div> -->
 
 	<!--===============================================================================================-->
 	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
@@ -265,6 +265,6 @@
 	</script>
 	<!--===============================================================================================-->
 	<script th:src="@{/js/main.js}"></script>
-
+	<script th:src="@{/assets/js/shopping-cart-ctrl.js}"></script>
 </body>
 </html>

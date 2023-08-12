@@ -8,15 +8,20 @@ import java.util.Optional;
 
 public interface ProductService {
 
+
     List<Product> findAll();
     List<Product> findPaginated(Pageable pageable);
 
     long getTotalProducts();
 
-    Product findById(Integer id);
+    Product findByID(Integer id);
 
-    List<Product> findByCategoryId(String cid);
+    List<Product> findbyCategoryId(String cid, Pageable pageable);
     List<Product> findByPriceAndCategoryId(String categoryId, Double minPrice, Double maxPrice);
+
+
+    List<Product> searchByKeyword(String keyword, Pageable pageable);
+    List<Product> getProductsByPriceRange(double minPrice, double maxPrice, Pageable pageable);
     
     public Product create(Product product) ;
 

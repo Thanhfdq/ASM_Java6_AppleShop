@@ -31,7 +31,7 @@ public class ProductRestController {
 	}
 	@GetMapping("{id}")
 	public Product getOne(@PathVariable("id") Integer id) {
-		return productService.findById(id);
+		return productService.findByID(id);
 	}
 	@PostMapping
 	public Product post(@RequestBody Product product) {
