@@ -42,15 +42,10 @@
         id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a
-                class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="products.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">
-                SB Admin <sup>2</sup>
-            </div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="/admin/products">
+            <img src="https://assets.website-files.com/60a70f8574f9eb38a2b19c99/643d83dec4b1258659fd0402_apple-authorized-reseller-logo-white.png"
+                 style="width: 130px">
         </a>
 
         <!-- Divider -->
@@ -282,10 +277,11 @@
                             Activity Log
                         </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal"
+                          
+                             <a ng-if="$auth.user.username == null" class="dropdown-item" href="/auth/logoff/success" data-toggle="modal"
                                data-target="#logoutModal"> <i
                                     class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                 {{$auth.user.username}}|Logout
                             </a>
                         </div>
                     </li>
@@ -330,10 +326,9 @@
                                        placeholder="Name">
                             </div>
                             <div class="mb-3">
-                                <select ng-model="form.category"
-                                        ng-options="cate.id as cate.name for cate in categoryItems track by cate.id"
+                                <select ng-model="form.category.id"
                                         class="form-select">
-                                    <option seleted>Choose a category...</option>
+                                    <option ng-repeat="c in categoryItems" ng-value="c.id">{{c.name}}</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -375,7 +370,7 @@
                                 <td>{{pro.name}}</td>
                                 <td>{{pro.category.name}}</td>
                                 <td>{{pro.price}}</td>
-                                <td>{{pro.createdate}}</td>
+                                <td>{{pro.createDate | date:'dd-MM-yyyy'}}</td>
                                 <td>{{pro.quantity}}</td>
                                 <td>{{pro.available?'Còn hàng':'Hết hàng'}}</td>
                                 <td>
@@ -448,7 +443,7 @@
                 <button class="btn btn-secondary" type="button"
                         data-dismiss="modal">Cancel
                 </button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="/auth/logoff/success">Logout</a>
             </div>
         </div>
     </div>

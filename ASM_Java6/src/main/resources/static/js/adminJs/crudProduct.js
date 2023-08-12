@@ -95,24 +95,18 @@ app.controller("ctrl", function ($scope, $http, $filter) {
     $scope.detail = function (id) {
         var url = `${host}/products/${id}`;
         $http.get(url).then(resp => {
-            var product = resp.data;
-            $scope.form.id = product.id;
-            $scope.form.name = product.name;
-            $scope.form.category = product.category.id;
-            $scope.form.price = product.price;
-            $scope.form.quantity = product.quantity;
-            $scope.form.image = product.image;
-            $scope.form.createdate = product.createdate;
+            $scope.form = resp.data;
             console.log("Success", resp)
         }).catch(error => {
             console.log("Error", error)
-        })
+})
     }
 
     $scope.create = function () {
         var item = angular.copy($scope.form);
         var url = `${host}/products`;
         $http.post(url, item).then(resp => {
+            // item.available = item.quantity>0?'true':'false';
             $scope.items.push(item);
             $scope.reset();
             console.log("Success", resp)
@@ -126,11 +120,9 @@ app.controller("ctrl", function ($scope, $http, $filter) {
         var item = angular.copy($scope.form);
         var url = `${host}/products/${$scope.form.id}`;
         $http.put(url, item).then(resp => {
-            console.log("1", resp)
             var index = $scope.items.findIndex(item => item.id == $scope.form.id);
-            console.log("2", resp)
             $scope.items[index] = resp.data;
-            console.log("Success", resp)
+            // $scope.items[index].available = item[index].quantity>0?'true':'false';
             alert("Update successfully!");
         }).catch(error => {
             console.log("Error", error)

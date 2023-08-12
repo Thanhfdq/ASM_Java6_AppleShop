@@ -73,7 +73,7 @@ public class AuthController {
 			System.out.println(role);
 			System.out.println(roles.toString());
 			if ("ROLE_ADMIN".equalsIgnoreCase(role)) {
-				return "redirect:/admin/index"; // Redirect to admin page
+				return "redirect:/admin/products"; // Redirect to admin page
 			} else if ("ROLE_USER".equalsIgnoreCase(role)) {
 				return "redirect:/"; // Redirect to user's product list page
 			}
