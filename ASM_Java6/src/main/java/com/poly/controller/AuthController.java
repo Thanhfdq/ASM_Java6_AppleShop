@@ -2,9 +2,11 @@ package com.poly.controller;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+import org.springframework.security.core.AuthenticationException;
 
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import com.poly.entity.Account;
 import com.poly.service.UserService;
@@ -31,7 +35,31 @@ public class AuthController {
 		return "/admin/login.html";
 	}
 
-
+//	@Autowired
+//    private AuthenticationManager authenticationManager;
+//
+//    @PostMapping("/login")
+//    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+//        try {
+//            // Create an authentication token with the provided username and password
+//            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
+//
+//            // Authenticate the user
+//            Authentication authentication = authenticationManager.authenticate(authRequest);
+//
+//            // Set the authenticated user in the SecurityContext
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//            // Redirect to the successful login page
+//            return "redirect:/auth/login/success";
+//        } catch (AuthenticationException e) {
+//            // Handle authentication failure (invalid credentials)
+//            return "redirect:/login?error";
+//        }
+//    }
+//
+//	
+	
 	@GetMapping("/auth/login/success")
 	public String x(@RequestParam("username") String username) {
 		UserDetails userDetails = userService.loadUserByUsername(username);
@@ -52,7 +80,7 @@ public class AuthController {
 
 	}
 
-//	private Account  {
+//	private  Account  {
 //	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //	    if (authentication == null || AnonymousAuthenticationToken.class.
 //	      isAssignableFrom(authentication.getClass())) {
@@ -61,12 +89,12 @@ public class AuthController {
 //	    return authentication.isAuthenticated();
 //	} 
 
-	@RequestMapping("/oauth2/login/success")
-	public String OAuthLogin(OAuth2AuthenticationToken oauth2, Model model) {
-		userService.loginFormOAuth2(oauth2);
-		model.addAttribute("message", "Success");
-		return "redirect:/product/list";
-	}
+//	@RequestMapping("/oauth2/login/success")
+//	public String OAuthLogin(OAuth2AuthenticationToken oauth2, Model model) {
+//		userService.loginFormOAuth2(oauth2);
+//		model.addAttribute("message", "Success");
+//		return "redirect:/product/list";
+//	}
 
 	@RequestMapping("/auth/login/error")
 

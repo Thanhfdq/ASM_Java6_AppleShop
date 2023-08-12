@@ -59,17 +59,17 @@ public class UserService implements UserDetailsService{
 		
 	}
 	
-	public void loginFormOAuth2(OAuth2AuthenticationToken oauth2) {
-		String email = oauth2.getPrincipal().getAttribute("email");
-		String password = Long.toHexString(System.currentTimeMillis());
-		
-		UserDetails user = User.withUsername(email).password(pe.encode(password)).roles("USER").build();
-		
-		Authentication auth = new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(auth);
-	}
+//	public void loginFormOAuth2(OAuth2AuthenticationToken oauth2) {
+//		String email = oauth2.getPrincipal().getAttribute("email");
+//		String password = Long.toHexString(System.currentTimeMillis());
+//		
+//		UserDetails user = User.withUsername(email).password(pe.encode(password)).roles("USER").build();
+//		
+//		Authentication auth = new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
+//		SecurityContextHolder.getContext().setAuthentication(auth);
+//	}
 	
-	public Account getOneByUsername(String username) {
-		return accountDAO.findById(username).get();
-	}
+//	public Account getOneByUsername(String username) {
+//		return accountDAO.findById(username).get();
+//	}
 }
