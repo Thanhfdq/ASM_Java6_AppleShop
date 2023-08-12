@@ -32,40 +32,40 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//		http.csrf().disable().authorizeHttpRequests(
-//				(requests) -> requests
-//				.requestMatchers("/rest/orders/**").authenticated()
-//				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+////		http.csrf().disable().authorizeHttpRequests(
+////				(requests) -> requests
+////				.requestMatchers("/rest/orders/**").authenticated()
+////				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+////				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
+////				.anyRequest().permitAll())
+////				.formLogin((form) -> form.loginPage("/auth/login/form")
+////						.defaultSuccessUrl("/auth/login/success",true)
+////						.failureUrl("/auth/login/error").permitAll())
+////				.logout((logout) -> logout.permitAll())
+////				.rememberMe(Customizer.withDefaults())
+////				.exceptionHandling((handling) -> handling.accessDeniedPage("/auth/access/denied"))
+////				.oauth2Login((oauth2) -> oauth2.loginPage("/auth/login/form")
+////					.defaultSuccessUrl("/oauth2/login/success",true)
+////					.failureUrl("/auth/login/error")
+////					.authorizationEndpoint(authorization -> authorization
+////							.baseUri("/oauth2/authorization")));
+//		
+		
+//		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+//		http.authorizeHttpRequests((requests) -> requests
+//				.requestMatchers("/order/**").permitAll()
+////				.requestMatchers("/order/**").authenticated()
+//				.requestMatchers("/admin/**").permitAll()
 //				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
-//				.anyRequest().permitAll())
-//				.formLogin((form) -> form.loginPage("/auth/login/form")
-//						.defaultSuccessUrl("/auth/login/success",true)
-//						.failureUrl("/auth/login/error").permitAll())
-//				.logout((logout) -> logout.permitAll())
-//				.rememberMe(Customizer.withDefaults())
-//				.exceptionHandling((handling) -> handling.accessDeniedPage("/auth/access/denied"))
-//				.oauth2Login((oauth2) -> oauth2.loginPage("/auth/login/form")
-//					.defaultSuccessUrl("/oauth2/login/success",true)
-//					.failureUrl("/auth/login/error")
-//					.authorizationEndpoint(authorization -> authorization
-//							.baseUri("/oauth2/authorization")));
-		
-		
-		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/order/**").permitAll()
-//				.requestMatchers("/order/**").authenticated()
-				.requestMatchers("/admin/**").permitAll()
-				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
-				.requestMatchers("/rest/**").permitAll()
-				.anyRequest().permitAll()
-		)
-		.formLogin((form) -> form
-			.loginPage("/auth/login/form")
-			.defaultSuccessUrl("/auth/login/success",true)
-			.failureUrl("/auth/login/error")
-			.permitAll()
-		);
+//				.requestMatchers("/rest/**").permitAll()
+//				.anyRequest().permitAll()
+//		)
+//		.formLogin((form) -> form
+//			.loginPage("/auth/login/form")
+//			.defaultSuccessUrl("/auth/login/success",true)
+//			.failureUrl("/auth/login/error")
+//			.permitAll()
+//		)
 //		.logout((logout) -> logout.permitAll())
 //		.rememberMe(Customizer.withDefaults())
 //		.exceptionHandling((handling) -> handling.accessDeniedPage("/auth/access/denied"))
