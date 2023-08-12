@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 import com.poly.service.UserService;
-
-
 
 
 @Controller
@@ -19,10 +18,11 @@ public class TestController {
 	@Autowired
 	UserService userService;
 	
-	//test commit >Z?????????
-    @RequestMapping("/user/wellcome")
-    public String test(){
-        return "/admin/login.html";
+
+    @RequestMapping("/index")
+    public String testv23(){
+        return "user/index";
+
     }
     
     @RequestMapping("/auth/login")

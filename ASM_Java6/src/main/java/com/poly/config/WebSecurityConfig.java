@@ -34,11 +34,11 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(
 				(requests) -> requests
 				.requestMatchers("/order/**").authenticated()
-				.requestMatchers("/admin/**").hasAnyRole("ADMIN","DIREC")
-				.requestMatchers("/rest/authorities").hasRole("DIREC")
+				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
 				.anyRequest().permitAll())
 				.formLogin((form) -> form.loginPage("/auth/login/form")
-						.defaultSuccessUrl("/auth/login/success",false)
+						.defaultSuccessUrl("/auth/login/success",true)
 						.failureUrl("/auth/login/error").permitAll())
 				.logout((logout) -> logout.permitAll())
 				.rememberMe(Customizer.withDefaults())
