@@ -69,10 +69,17 @@
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
+						
+						<a ng-if="$auth.user.username == null" href="/auth/logoff/success" class="flex-c-m trans-04 p-lr-25">
+							Login
 						</a>
+						<a ng-if="$auth.user.username != null" href="/order/list" class="flex-c-m trans-04 p-lr-25">
+							My Order
+						</a>
+						 <a class="flex-c-m trans-04 p-lr-25"  ng-if="$auth.user.username != null" href="/auth/logoff/success">{{$auth.user.username}} | Logout</a>
+							
+						
+						
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -301,7 +308,7 @@
 					<div class="header-cart-buttons flex-w w-full">
 						<a th:href="@{|/cart/view|}"
 							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart </a> <a href="shoping-cart.html"
+							View Cart </a> <a th:href="@{|/order/checkout|}"
 							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out </a>
 					</div>

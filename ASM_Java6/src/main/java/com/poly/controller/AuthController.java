@@ -25,6 +25,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import com.poly.entity.Account;
 import com.poly.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AuthController {
 	@Autowired
@@ -35,6 +37,8 @@ public class AuthController {
 		return "/admin/login.html";
 	}
 
+	@Autowired
+	HttpSession session;
 //	@Autowired
 //    private AuthenticationManager authenticationManager;
 //
@@ -107,6 +111,7 @@ public class AuthController {
 	public String logoff(Model model) {
 
 		model.addAttribute("message", "Đăng xuất thành công!");
+		session.setAttribute("authentication", null);
 		return "forward:/auth/login/form";
 	}
 
