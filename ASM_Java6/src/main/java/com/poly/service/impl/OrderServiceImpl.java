@@ -40,7 +40,13 @@ public class OrderServiceImpl implements OrderService{
 	public Order findById(Long id) {
 		return dao.findById(id).get();
 	}
-	
+	public List<OrderDetail> findDetailByOrderId(Long orderId) {
+		return ddao.findByOrderId(orderId);
+	}
+	public List<Order> findAll() {
+		return dao.findAll();
+	}
+
 	public List<Order> findByUsername(String username) {
 		return dao.findByUsername(username);
 	}

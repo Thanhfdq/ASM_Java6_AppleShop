@@ -3,8 +3,7 @@ const app = angular.module("app", []);
 app.controller("ctrl", function ($scope, $http, $filter) {
     $scope.form = {}
     $scope.items = []
-    $scope.categoryItems = []
-
+    $scope.detailItems = []
     $scope.currentPage = 0;
     $scope.pageSize = 10;
     $scope.sortingOrder = sortingOrder;
@@ -65,72 +64,34 @@ app.controller("ctrl", function ($scope, $http, $filter) {
     $scope.search();
 
 
-    $scope.reset = function () {
-        $scope.form = {};
-        //$scope.form.category = "default";
-    }
-
     $scope.setPage = function () {
         $scope.currentPage = this.n;
     };
 
     $scope.load_all = function () {
-        var url = `${host}/products`;
+        var url = `${host}/orders`;
         $http.get(url).then(resp => {
             $scope.items = resp.data;
             console.log("Success", resp)
         }).catch(error => {
             console.log("Error", error)
         })
+    }
+
+    $scope.detail = function (orderId) {
         //fill category select
-        var url = `${host}/categories`;
+        var url = `${host}/orders/orderId`;
         $http.get(url).then(resp => {
-            $scope.categoryItems = resp.data;
+            $scope.detailItems = resp.data;
             console.log("Success", resp)
         }).catch(error => {
             console.log("Error", error)
         })
     }
 
-    $scope.detail = function (id) {
-        var url = `${host}/products/${id}`;
-        $http.get(url).then(resp => {
-            $scope.form = resp.data;
-            console.log("Success", resp)
-        }).catch(error => {
-            console.log("Error", error)
-        })
-    }
-
-    $scope.create = function () {
-        var item = angular.copy($scope.form);
-        var url = `${host}/products`;
-        $http.post(url, item).then(resp => {
-            // item.available = item.quantity>0?'true':'false';
-            $scope.items.push(item);
-            $scope.reset();
-            console.log("Success", resp)
-            alert("Create successfully!");
-        }).catch(error => {
-            console.log("Error", error)
-        })
-    }
-
-    $scope.update = function () {
-        var item = angular.copy($scope.form);
-        var url = `${host}/products/${$scope.form.id}`;
-        $http.put(url, item).then(resp => {
-            var index = $scope.items.findIndex(item => item.id == $scope.form.id);
-            $scope.items[index] = resp.data;
-            // $scope.items[index].available = item[index].quantity>0?'true':'false';
-            alert("Update successfully!");
-        }).catch(error => {
-            console.log("Error", error)
-        });
-    }
 
     $scope.delete = function (id) {
-        if (confirm("THIS ACTION CAN'T UNDO!\nAre you sure to delete this product?") == true) {
+        if (confirm("THIS ACTION CAN'T UNDO!\nAre you sure to delete this product?")) {
             var url = `${host}/products/${id}`;
             $http.delete(url).then(resp => {
                 var index = $scope.items.findIndex(item => item.id == $scope.form.id);
@@ -146,7 +107,6 @@ app.controller("ctrl", function ($scope, $http, $filter) {
 
     //load data to table
     $scope.load_all();
-    $scope.reset();
 
 });
 // ctrl.$inject = ['$scope', '$filter'];

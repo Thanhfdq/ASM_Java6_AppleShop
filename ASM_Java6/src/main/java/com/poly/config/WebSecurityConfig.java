@@ -53,10 +53,10 @@ public class WebSecurityConfig {
 		
 		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/order/**").permitAll()
-				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
-				.requestMatchers("/rest/**").permitAll()
+//				.requestMatchers("/order/**").permitAll()
+//				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+//				.requestMatchers("/rest/authorities").hasAuthority("ROLE_ADMIN")
+//				.requestMatchers("/rest/**").permitAll()
 				.anyRequest().permitAll()
 		)
 		.formLogin((form) -> form

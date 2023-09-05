@@ -243,8 +243,7 @@
 					ng-repeat="item in cart.items">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img ng:src="{{item.image}}"
-								th:alt="@{{item.image}}" width="100px">
+							<img ng-src="{{item.image}}"width="100px">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
